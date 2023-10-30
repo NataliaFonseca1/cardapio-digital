@@ -7,7 +7,7 @@ import { RiRestaurantLine } from "react-icons/ri";
 export const MenuContainer = styled.div`
 display: flex;
 align-items: center;
-width: 409px;
+width: 100%;
 height: auto;
 flex-shrink: 0;
 border: 1px solid #FF6100;
@@ -26,6 +26,7 @@ display:flex;
 border: none;
 background-color: none;
 width:100%;
+cursor:pointer;
 `
 
 export const RequestIconCM = styled(IoCartOutline)`

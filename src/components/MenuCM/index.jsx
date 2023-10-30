@@ -1,5 +1,5 @@
 import React from 'react'
-import { HomeButtonCM, Label, MenuContainer, RequestIconCM, MenuIconCM, IconContainer } from './styles'
+import * as S from './styles'
 
 
 
@@ -7,20 +7,20 @@ import { HomeButtonCM, Label, MenuContainer, RequestIconCM, MenuIconCM, IconCont
 const MenuInferiorCM = () =>{
 return(
   <>
-  <MenuContainer>
-<HomeButtonCM>
-<IconContainer>
- <MenuIconCM/>
- <Label>Cardápio</Label>
- </IconContainer>
- </HomeButtonCM>
-<HomeButtonCM>
-<IconContainer>
-<RequestIconCM/>
-<Label>Pedidos</Label>
- </IconContainer>
- </HomeButtonCM>
-  </MenuContainer>
+  <S.MenuContainer>
+<S.HomeButtonCM>
+<S.IconContainer>
+ <S.MenuIconCM/>
+ <S.Label>Cardápio</S.Label>
+ </S.IconContainer>
+ </S.HomeButtonCM>
+<S.HomeButtonCM>
+<S.IconContainer>
+<S.RequestIconCM/>
+<S.Label>Pedidos</S.Label>
+ </S.IconContainer>
+ </S.HomeButtonCM>
+  </S.MenuContainer>
   </>
 )
 }

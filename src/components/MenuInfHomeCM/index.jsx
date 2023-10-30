@@ -1,25 +1,25 @@
 import React from 'react'
-import { HomeButtonCM, Label, MenuContainer, HomeIconCM, RequestIconCM, IconContainer } from './styles'
+import * as S from './styles'
 
 
 
 const MenuInferiorHomeCM = () =>{
 return(
   <>
-  <MenuContainer>
-<HomeButtonCM>
-<IconContainer>
- <HomeIconCM/>
- <Label>Home</Label>
- </IconContainer>
- </HomeButtonCM>
-<HomeButtonCM>
-<IconContainer>
-<RequestIconCM/>
-<Label>Pedidos</Label>
- </IconContainer>
- </HomeButtonCM>
-  </MenuContainer>
+  <S.MenuContainer>
+<S.HomeButtonCM>
+<S.IconContainer>
+ <S.HomeIconCM/>
+ <S.Label>Home</S.Label>
+ </S.IconContainer>
+ </S.HomeButtonCM>
+<S.HomeButtonCM>
+<S.IconContainer>
+<S.RequestIconCM/>
+<S.Label>Pedidos</S.Label>
+ </S.IconContainer>
+ </S.HomeButtonCM>
+  </S.MenuContainer>
   </>
 
 )
