@@ -1,16 +1,35 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react"
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AdicaoRefPage from "./pages/AdicaoRefPage";
+import EdicaoRefPage from "./pages/EdicaoRefPage";
 
-import ExemploPage from "./pages/ExemploPage/ExemploPage";
-import ExemploPage2 from "./pages/ExemploPage2/ExemploPage2";
+const rotas = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <>
+       <AdicaoRefPage/>
+      </>
+    )
+  },
+  {
+    path: '/edit',
+    element: (
+      <>
+         <EdicaoRefPage/>
+      </>
+    )
+  },
+])
+
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<ExemploPage />} />
-        <Route path="/Page2" element={<ExemploPage2 />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+     <RouterProvider router={rotas}/>
+     </>
+ 
+   
   );
 }
 
