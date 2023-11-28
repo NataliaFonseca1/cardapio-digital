@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Select from 'react-select'
-import { customSelectStyles } from './styles'
 import * as S from './styles'
 
 
 
-const Card= ()=>{
+const Card= (props)=>{
   const [addSelect, setAddSelect]=useState(false)
-  const [selectedValues, setSelectedValues] = useState([]);  
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const options = [
     { value: 1, label: 'Portuguesa'},
     { value: 2, label: 'Italiana'},
@@ -21,48 +20,98 @@ const Card= ()=>{
     .then((data)=>setSelectValue(data))
     
   },[])*/
-  const SelectOption=()=>{
-setAddSelect(true)
+
+
+  const handleSelectChange = (selectedCategorias) => {
+setSelectedCategories(selectedCategorias)
 
   }
-  const handleSelectChange = () => {
-  
-    console.log(selectedValues);
-  }
-
   return(
+    <>
+    
+    
+
+    <h1>Categorias</h1>
     <S.ButtonCardContainer>
-     
-  <S.ButtonCardAdd onClick={SelectOption}>+</S.ButtonCardAdd>
+    
+  <S.ButtonCardAdd onClick={() =>setAddSelect(true)}>+</S.ButtonCardAdd>
     
   {addSelect && (
-    <>
+    
   <S.CardCategory>
    
-    <label>
-  Categorias:
- 
   <Select 
-                placeholder="Pratos Principais"
+                
                 isMulti
                 options={options}
-                onChange={(item)=>setSelectedValues(item)}
-                isClearable={true}
+                onChange={handleSelectChange}
+                  
+                value={selectedCategories}
+                placeholder="Pratos Principais"
                 closeMenuOnSelect={false}
-                styles={customSelectStyles}
+                styles={{
+                
+                  container: ({ width, ...baseStyles }) => ({
+                    ...baseStyles,
+                    width: Math.min(300, 107 + 1 * 30), // Ajuste conforme necessário
+                    margin: 0,
+                    padding: 0,
+                  }),
+                  control: (baseStyles) => ({
+                    ...baseStyles,
+                    width: 'auto',
+                    minWidth: 120,
+                    height: 'auto',
+                    borderRadius: 5,
+                    background: '#ff6100',
+                    color: '#fff',
+                    fontFamily: 'Inter',
+                    fontSize: 12,
+                    fontWeight: 500,
+                    lineHeight: 'normal',
+                    padding: 2,
+                    border: 'none',
+                    boxShadow: 'none',
+                  }),
+
+                    dropdownIndicator: (baseStyles) => ({
+                      ...baseStyles,
+                      display: 'none',
+                    }),
+                    indicatorSeparator: (baseStyles) => ({
+                      ...baseStyles,
+                      display: 'none',
+                    }),
+                    menu: (baseStyles) => ({
+                      ...baseStyles,
+                      fontSize: 12, // Ajuste conforme necessário
+                    }),
+                    option: (provided, state) => ({
+                      ...provided,
+                      fontSize: 12, // Ajuste conforme necessário
+                      whiteSpace: 'nowrap', // Evita a quebra de linha
+                      overflow: 'hidden'
+                    }),
+                    placeholder: (baseStyles) => ({
+                      ...baseStyles,
+                      color: '#fff',
+                      fontSize: 12, 
+                      whiteSpace: 'nowrap', // Evita a quebra de linha
+                      overflow: 'hidden'
+                    }),
+                }}
+              
+                
               />
 
-  
-<button onClick={handleSelectChange}>imprimir</button>
-</label>
+
 
 </S.CardCategory>
-  </>
+
   )}
   
   </S.ButtonCardContainer>
-
-)
-}
-
+</>
+)}
+              
 export default Card
