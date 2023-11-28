@@ -49,11 +49,12 @@ const AddRefPage = () => {
 })
   }
 
-    /* axios.post('https://cardapio-digital-backend.onrender.com/teste')
+    /*axios.post('https://cardapio-digital-backend.onrender.com/adiciona-produto')
   .then((res)=>{
     console.log("dados atualizados", res.data)
-    setAddData(addData)})
-*/
+    setaddData(res.addData)
+  })
+  */
 
   const handleClick = () => {
     setIsEdit(true);
@@ -146,7 +147,7 @@ const handleCategoryChange=(categories)=>{
           <h3 onClick={handleClick}>{addData.prices}</h3>  
 
         </S.Container>
-        
+          
         </>
         
       )}

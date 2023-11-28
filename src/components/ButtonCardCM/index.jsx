@@ -53,7 +53,7 @@ setSelectedCategories(selectedCategorias)
                 
                   container: ({ width, ...baseStyles }) => ({
                     ...baseStyles,
-                    width: Math.min(300, 107 + 1 * 30), // Ajuste conforme necessário
+                    width: Math.min(300, 107 + 1 * 30), 
                     margin: 0,
                     padding: 0,
                   }),
@@ -84,19 +84,19 @@ setSelectedCategories(selectedCategorias)
                     }),
                     menu: (baseStyles) => ({
                       ...baseStyles,
-                      fontSize: 12, // Ajuste conforme necessário
+                      fontSize: 12, 
                     }),
                     option: (provided, state) => ({
                       ...provided,
-                      fontSize: 12, // Ajuste conforme necessário
-                      whiteSpace: 'nowrap', // Evita a quebra de linha
+                      fontSize: 12, 
+                      whiteSpace: 'nowrap', 
                       overflow: 'hidden'
                     }),
                     placeholder: (baseStyles) => ({
                       ...baseStyles,
                       color: '#fff',
                       fontSize: 12, 
-                      whiteSpace: 'nowrap', // Evita a quebra de linha
+                      whiteSpace: 'nowrap', 
                       overflow: 'hidden'
                     }),
                 }}
