@@ -10,6 +10,12 @@ import * as S from './styles';
 import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
 
+const options = [
+  { value: 1, label: 'Portuguesa'},
+  { value: 2, label: 'Italiana'},
+  { value: 3, label: 'Oriental'},
+  { value: 4, label: 'Alemã'},
+];
 
 
 const EditRefPage = () => {
@@ -17,7 +23,6 @@ const EditRefPage = () => {
   const [img, setImg]=useState('')
   const [isEdit, setIsEdit] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  console.log("Estado Inicial de selectedCategories:", selectedCategories);
   const [editData, seteditData] = useState({
     title: 'Filé de Boi com Salada Alemã',
     description: 'Carne brasileira regada ao molho, acompanhada de uma deliciosa salada típica da Alemanha.',
@@ -26,9 +31,18 @@ const EditRefPage = () => {
     categories:[],
   });
 
+  const handleCategoryChange=(selected)=>{
+    setSelectedCategories(selected)
+    const selectedCategoriesLabels=selected.map(option=> option.label)
+    seteditData((prevData) => ({
+      ...prevData,
+      categories: selectedCategoriesLabels,
+    }));
+    console.log("opções, ", selectedCategories)
+  }
 
   const handleChange =  (event, field) => {
-    seteditData({ ...editData, [field]: event.target.value, categories: selectedCategories });
+    seteditData({ ...editData, [field]: event.target.value });
   };
   const handleUpdate=async()=>{
   const docRef=doc(db, 'update', 'produto');
@@ -47,6 +61,7 @@ const EditRefPage = () => {
 .catch((error)=>{
   console.log(error);
 })
+setSelectedCategories([])
   }
 
     /*axios.post('https://cardapio-digital-backend.onrender.com/adiciona-produto')
@@ -73,7 +88,7 @@ const openModal=()=>{
 const downloadUrl=await getDownloadURL(imgRef)
   console.log("Imagem enviada com sucesso:", downloadUrl);
     
-  seteditData({ ...editData, imageUrl: downloadUrl, categories:selectedCategories });
+  seteditData({ ...editData, imageUrl: downloadUrl });
   setUploadModal(false)
 
     } catch (error) {
@@ -86,18 +101,10 @@ const handleDelete=()=>{
     setEditData(res.data)})
 console.log("dados atualizados", editData)
 */
-  seteditData({
-    title: 'Filé de Boi com Salada Alemã',
-    description: 'Carne brasileira regada ao molho, acompanhada de uma deliciosa salada típica da Alemanha.',
-    prices: 'Preço R$ 69,90',
-    imageUrl:'',
-    categories:[],
-  });
-}
-const handleCategoryChange=(categories)=>{
-  setSelectedCategories(categories)
-  console.log("opções, ", selectedCategories)
-}
+  }
+
+
+
 
   return (
     <S.PageContainer>
@@ -134,7 +141,7 @@ const handleCategoryChange=(categories)=>{
             <input type="text" value={editData.description} onChange={(e) => handleChange(e, "description")} />
           </p>
           <h2>Categorias</h2>
-          <Card handleCategory={handleCategoryChange}/> <br/>
+          <Card onChange={handleCategoryChange} options={options} selectedcategories={selectedCategories}/> <br/>
           <h3><input type="text" value={editData.prices} onChange={(e) => handleChange(e, "prices")} /></h3>
         </S.Container>
       ) : (
@@ -142,12 +149,13 @@ const handleCategoryChange=(categories)=>{
         <S.Container >
           <h1 onClick={handleClick}>{editData.title}</h1>
           <p onClick={handleClick}>{editData.description}</p>
-          <Card onClick={handleClick}/> <br/>
+          <Card onChange={handleCategoryChange} options={options} selectedcategories={selectedCategories}/> <br/>
           <h3 onClick={handleClick}>{editData.prices}</h3>  
 
         </S.Container>
-        
+          
         </>
+        
         
       )}
       <S.ButtonContainer>
@@ -157,6 +165,5 @@ const handleCategoryChange=(categories)=>{
       <MenuInferiorCM />
     </S.PageContainer>
   );
-};
-
+      }
 export default EditRefPage;

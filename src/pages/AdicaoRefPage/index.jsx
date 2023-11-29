@@ -9,7 +9,12 @@ import {v4} from "uuid"
 import * as S from './styles';
 import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
-
+const options = [
+  { value: 1, label: 'Portuguesa'},
+  { value: 2, label: 'Italiana'},
+  { value: 3, label: 'Oriental'},
+  { value: 4, label: 'Alemã'},
+];
 
 
 const AddRefPage = () => {
@@ -26,9 +31,18 @@ const AddRefPage = () => {
     categories:[],
   });
 
+  const handleCategoryChange=(selected)=>{
+    setSelectedCategories(selected)
+    const selectedCategoriesLabels=selected.map(option=> option.label)
+    setaddData((prevData) => ({
+      ...prevData,
+      categories: selectedCategoriesLabels,
+    }));
+    console.log("opções, ", selectedCategories)
+  }
 
   const handleChange =  (event, field) => {
-    setaddData({ ...addData, [field]: event.target.value, categories: selectedCategories });
+    setaddData({ ...addData, [field]: event.target.value });
   };
   const handleAdd=async()=>{
   const docRef=doc(db, 'update', 'produto');
@@ -73,7 +87,7 @@ const openModal=()=>{
 const downloadUrl=await getDownloadURL(imgRef)
   console.log("Imagem enviada com sucesso:", downloadUrl);
     
-  setaddData({ ...addData, imageUrl: downloadUrl, categories:selectedCategories });
+  setaddData({ ...addData, imageUrl: downloadUrl });
   setUploadModal(false)
 
     } catch (error) {
@@ -95,10 +109,7 @@ console.log("dados atualizados", editData)
   });
 */
 
-const handleCategoryChange=(categories)=>{
-  setSelectedCategories(categories)
-  console.log("opções, ", selectedCategories)
-}
+
 
   return (
     <S.PageContainer>
@@ -135,7 +146,7 @@ const handleCategoryChange=(categories)=>{
             <input type="text" value={addData.description} onChange={(e) => handleChange(e, "description")} />
           </p>
           <h2>Categorias</h2>
-          <Card handleCategory={handleCategoryChange}/> <br/>
+          <Card onChange={handleCategoryChange} options={options} selectedcategories={selectedCategories}/> <br/>
           <h3><input type="text" value={addData.prices} onChange={(e) => handleChange(e, "prices")} /></h3>
         </S.Container>
       ) : (
@@ -143,7 +154,7 @@ const handleCategoryChange=(categories)=>{
         <S.Container >
           <h1 onClick={handleClick}>{addData.title}</h1>
           <p onClick={handleClick}>{addData.description}</p>
-          <Card onClick={handleClick}/> <br/>
+          <Card onChange={handleCategoryChange} options={options} selectedcategories={selectedCategories}/> <br/>
           <h3 onClick={handleClick}>{addData.prices}</h3>  
 
         </S.Container>

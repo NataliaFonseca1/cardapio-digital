@@ -4,53 +4,21 @@ import * as S from './styles'
 
 
 
-const Card= (props)=>{
-  const [addSelect, setAddSelect]=useState(false)
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const options = [
-    { value: 1, label: 'Portuguesa'},
-    { value: 2, label: 'Italiana'},
-    { value: 3, label: 'Oriental'},
-    { value: 4, label: 'Alemã'},
-  ];
-
-  /*useEffect(()=>{
-    fetch('')
-    .then((res)=>res.json())
-    .then((data)=>setSelectValue(data))
-    
-  },[])*/
-
-
-  const handleSelectChange = (selectedCategorias) => {
-setSelectedCategories(selectedCategorias)
-
-  }
+const Card= ({selectedcategories, options, onChange})=>{
   return(
-    <>
-    
-    
-
+<>
     <h1>Categorias</h1>
     <S.ButtonCardContainer>
     
-  <S.ButtonCardAdd onClick={() =>setAddSelect(true)}>+</S.ButtonCardAdd>
-    
-  {addSelect && (
-    
-  <S.CardCategory>
-   
   <Select 
                 
                 isMulti
                 options={options}
-                onChange={handleSelectChange}
-                  
-                value={selectedCategories}
+                onChange={onChange} 
+                value={selectedcategories}
                 placeholder="Pratos Principais"
                 closeMenuOnSelect={false}
                 styles={{
-                
                   container: ({ width, ...baseStyles }) => ({
                     ...baseStyles,
                     width: Math.min(300, 107 + 1 * 30), 
@@ -73,7 +41,6 @@ setSelectedCategories(selectedCategorias)
                     border: 'none',
                     boxShadow: 'none',
                   }),
-
                     dropdownIndicator: (baseStyles) => ({
                       ...baseStyles,
                       display: 'none',
@@ -103,15 +70,10 @@ setSelectedCategories(selectedCategorias)
               
                 
               />
-
-
-
-</S.CardCategory>
-
-  )}
   
   </S.ButtonCardContainer>
 </>
-)}
+)
+              }
               
 export default Card
